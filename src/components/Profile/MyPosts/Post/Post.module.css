@@ -1,0 +1,9 @@
+.item {
+   color: hsb(224.6, 17.4%, 78.8%);
+ }
+
+ .item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+ }

@@ -11,28 +11,9 @@
   grid-gap: 10xp;
 }
 
-.header {
-  grid-area: h;
-  background-color: rgba(140, 201, 160, 0.445);
-}
 
-.header img {
-  width: 40px;
-}
 
-.nav {
-  grid-area: n;
-  background-color: rgba(144, 128, 235, 0.733);
-}
 
-.content {
-  grid-area: c;
-  background-color: rgba(19, 161, 142, 0.514);
-}
-
-.content__avatar-image {
-  width: 200px;
-}
 
 /* .App {
   text-align: center;
