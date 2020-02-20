@@ -1,6 +1,7 @@
 .nav {
   grid-area: n;
   background-color: #ecf0f1;
+  padding: 15px 0;
 }
 
 .item {
@@ -15,17 +16,14 @@
   transition: 0.2s;
 }
 
-.item .activeLink {
-  color: #16a085;
+nav .activeLink {
+  color: #16a085!important;
 }
 
 a {
   text-decoration: none;
 }
 
-a:hover {
-  color: #16a085;
-}
 
 a:visited{
   color: #34495e;
