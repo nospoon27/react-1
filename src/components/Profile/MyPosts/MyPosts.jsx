@@ -3,6 +3,14 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 function MyPosts () {
+
+  let postsData = [
+    {message: "Hi. how are you?"},
+    {message: "It's my first post"},
+  ]; 
+
+  let posts = postsData.map(p => <Post message={p.message} />);
+
    return(
       <div>
           my posts
@@ -10,9 +18,7 @@ function MyPosts () {
             new post
           </div> 
           <div className={s.posts}>
-            posts
-            <Post message='Hi. how are you?' />
-            <Post message="It's my first post" />
+            {posts}
           </div>
         </div>
    );
