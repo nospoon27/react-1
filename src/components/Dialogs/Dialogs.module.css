@@ -4,17 +4,31 @@
 }
 
 .dialogsItem {
-
+   color: #34495e;
+   font-weight: 500;
+   font-size: 18px;
 }
 
 .dialog {
+   padding: 8px 0;
+   padding-left: 12px;
+}
 
+.active {
+   background-color: rgba(140, 201, 160, 0.445);
+}
+
+.dialog:hover {
+   background-color: rgba(140, 201, 160, 0.178);
 }
 
 .messages {
-
+   border-left: #34495e50 1px solid;
+   padding-left: 15px;
 }
 
 .message {
-   
+   color: #34495e;
+   font-weight: 400;
+   font-size: 18px;
 }

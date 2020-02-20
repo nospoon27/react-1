@@ -1,20 +1,32 @@
 .nav {
   grid-area: n;
-  background-color: rgba(144, 128, 235, 0.733);
+  background-color: #ecf0f1;
 }
 
 .item {
-  color: white;
+  color: #34495e;
+  font-weight: 600;
+  padding: 5px 15px;
+  display: block;
 }
 
-.activeLink {
-  color: aqua;
+.item:hover {
+  background-color: #fff;
+  transition: 0.2s;
+}
+
+.item .activeLink {
+  color: #16a085;
 }
 
 a {
   text-decoration: none;
 }
 
-a:active{
-  color: white;
+a:hover {
+  color: #16a085;
+}
+
+a:visited{
+  color: #34495e;
 }

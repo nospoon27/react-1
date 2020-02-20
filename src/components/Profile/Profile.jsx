@@ -4,12 +4,10 @@ import MyPosts from './MyPosts/MyPosts'
 
 function Profile () {
    return (
-      <div>
-        <div>
-          <img className={s.image} src="https://img3.goodfon.ru/original/2880x1800/1/2f/ozero-gory-lesa-derevya.jpg"/>
-        </div>
-        <div>
-          ava + desc
+      <div className={s.profileWrapper}>
+        <div className={s.profileImage}></div>
+        <div className={s.profileDescription}>
+          Description.... Lorem ipsum dolor sit.
         </div>
         <MyPosts />
       </div>

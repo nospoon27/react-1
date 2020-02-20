@@ -6,7 +6,7 @@ function Dialogs() {
     <div>
       <div className={s.dialogs}>
         <div className={s.dialogsItem}>
-          <div className={s.dialog}>Дим</div>
+          <div className={s.dialog + ' ' + s.active}>Дим</div>
           <div className={s.dialog}>Сергей</div>
           <div className={s.dialog}>Игорь</div>
           <div className={s.dialog}>Евгений</div>

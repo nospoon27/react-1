@@ -9,11 +9,14 @@
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10xp;
+
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: rgba(19, 161, 142, 0.514);
+  background-color: rgba(255, 255, 255, 0.514);
+  padding: 15px;
 }
 
 
