@@ -7,6 +7,14 @@
   color: white;
 }
 
-.active {
+.activeLink {
   color: aqua;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active{
+  color: white;
 }
