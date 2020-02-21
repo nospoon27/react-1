@@ -12,7 +12,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 function App(props) {
   console.log(props);
   return (
-    <BrowserRouter>
+
       <div className="app-wrapper">
         <Header/>
         <Navbar/>
@@ -26,7 +26,7 @@ function App(props) {
           <Route path='/settings' component={Settings} />        
         </div>
       </div>
-    </BrowserRouter>
+    
   );
 }
 
