@@ -5,26 +5,9 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message'
 
 function Dialogs(props) {
-
-  let dialogsData = [
-    {id: 1, name: 'Дим1'},
-    {id: 2, name: 'Дим2'},
-    {id: 3, name: 'Дим3'},
-    {id: 4, name: 'Дим4'},
-    {id: 5, name: 'Дим5'},
-  ];
-
-  let messagesData = [
-    {id: 1, message: 'Hi'},
-    {id: 2, message: 'Hello'},
-    {id: 3, message: 'Bye'},
-    {id: 4, message: 'Yo'},
-    {id: 5, message: 'Get cash'},
-    {id: 6, message: 'Welcome'},
-  ];
-
-  let dialogs = dialogsData.map(d => <DialogItem id={d.id} name={d.name} />);
-  let messages = messagesData.map(m => <Message id={m.id} message={m.message} />);
+  
+  let dialogs = props.state.dialogs.map(d => <DialogItem id={d.id} name={d.name} />);
+  let messages = props.state.messages.map(m => <Message id={m.id} message={m.message} />);
 
   return (
     <div>
@@ -32,8 +15,18 @@ function Dialogs(props) {
         <div className={s.dialogsItem}>
           {dialogs}
         </div>
-        <div className={s.messages}>
-          {messages}
+        <div className={s.messagesWrapper}>
+          <div className={s.messages}>
+            {messages}
+          </div>
+          <div className={s.newMessageBlock}>
+            <div className={s.text}>
+              <textarea placeholder='Message'></textarea>
+            </div>
+            <div className={s.action}>
+              <button>Send</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

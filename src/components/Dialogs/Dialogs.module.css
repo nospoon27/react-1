@@ -24,9 +24,67 @@
    background-color: rgba(140, 201, 160, 0.178);
 }
 
-.messages {
-   border-left: #34495e50 1px solid;
+.messagesWrapper {
+   display: grid;
+   grid-template-rows: 5fr 110px;
    padding-left: 15px;
+   border-left: #34495e50 1px solid;
+}
+
+.newMessageBlock {
+   display: flex;
+   flex-direction: column;
+}
+
+.text {
+   height: 70px;
+   display: flex;
+}
+
+.newMessageBlock textarea {
+   width: 100%;
+   align-self: stretch;
+   border: 1.4px solid #34495e50;
+   outline: none;
+   -moz-appearance: none;
+   resize: none;
+   font-size: 16px;
+   font-weight: 500;
+   color: #233241;
+}
+
+.newMessageBlock .action {
+   display: flex;
+   justify-content: flex-end;
+   margin-top: 10px;
+}
+
+.action button {
+   background-color: rgba(140, 201, 160, 0.445);
+   border: none;
+   color: #34495e;
+   font-size: 18px;
+   font-weight: 500;
+   cursor: pointer;
+   padding: 10px 20px;
+   transition: 0.5s ease-in-out;
+}
+
+.action button:hover {
+   color: #293949;
+}
+
+.action button:active {
+   color: #1e2935;
+   background-color: rgba(140, 201, 160, 0.63);
+   border: none;
+   transition: 0.1s ease-in-out;
+}
+
+.messages {
+   padding-bottom: 15px;
+   margin-bottom: 15px;
+   border-bottom: #34495e50 1px solid;
 }
 
 .message {
