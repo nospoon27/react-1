@@ -1,8 +1,8 @@
 let state = {
   profilePage:{
     posts: [
-      {message: "Hi. how are you?"},
-      {message: "It's my first post"},
+      {id: 1, message: "Hi. how are you?"},
+      {id: 2, message: "It's my first post"},
     ],
     
   },
@@ -23,6 +23,15 @@ let state = {
       {id: 6, message: 'Welcome'},
     ]
   }
+};
+
+export let addPost = (postMessage) => {
+  let id = state.profilePage.posts.length + 1;
+  let newPost = {
+    id: id,
+    message: postMessage 
+  };
+  state.profilePage.posts.push(newPost);
 };
 
 export default state;
