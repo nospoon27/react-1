@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
+import DialogItem from './DialogItem/DialogItem';
+import Message from './Message/Message'
 
 function Dialogs(props) {
 
@@ -36,18 +38,6 @@ function Dialogs(props) {
       </div>
     </div>
   );
-}
-
-function DialogItem(props) {
-  let path = `/dialogs/${props.id}`;
-
-  return (
-    <NavLink to={path} className={s.dialog} activeClassName={s.active}>{props.name}</NavLink>
-  );
-}
-
-function Message(props) {
-  return <div className={s.message}>{props.message}</div>
 }
 
 export default Dialogs;
