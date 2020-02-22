@@ -7,7 +7,11 @@ function Profile(props) {
   return (
     <div className={s.profileWrapper}>
       <ProfileInfo />
-      <MyPosts posts={props.posts} addPost={props.addPost} />
+      <MyPosts 
+      posts={props.profilePage.posts} 
+      addPost={props.addPost}
+      newPostText={props.profilePage.newPostText}
+      updateNewPostText={props.updateNewPostText} />
     </div>
   );
 }
