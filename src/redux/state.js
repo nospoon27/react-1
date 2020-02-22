@@ -1,4 +1,7 @@
-import { renderEntireTree } from "../render";
+
+export let renderEntireTree = () => {
+  console.log('asd');
+}
 
 let state = {
   profilePage:{
@@ -30,8 +33,10 @@ let state = {
   }
 };
 
+window.state = state;
+
 //* Добавление поста
-export let addPost = () => {
+export const addPost = () => {
   let id = state.profilePage.posts.length + 1;
   let newPost = {
     id: id,
@@ -40,13 +45,17 @@ export let addPost = () => {
   //* Очистить текст после добавления
   state.profilePage.newPostText = '';
   state.profilePage.posts.push(newPost);
-  renderEntireTree(state);
+  renderEntireTree();
 };
 
 //* Обновление текста в <textarea />
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
   state.profilePage.newPostText = newText;
-  renderEntireTree(state);
+  renderEntireTree();
+}
+
+export const subscribe = (observer) => {
+  renderEntireTree = observer;
 }
 
 export default state;
