@@ -7,15 +7,15 @@ function MyPosts (props) {
 
   // Обработка события добавления нового поста
   let onAddPost = () => { 
-    let text = newPostElem.current.value;
-    props.addPost();
+    let action = { type: 'ADD-POST' };
+    props.dispatch(action);
   }
   
   // Обработка события изменения текста в <textarea />
   let onPostChange = () => {
     let text = newPostElem.current.value;
-    props.updateNewPostText(text);
-    console.log(text);
+    let action = { type: 'UPDATE-NEW-POST-TEXT', text: text };
+    props.dispatch(action);
   }
 
   let posts = props.posts.map(p => <Post message={p.message} />);
