@@ -1,21 +1,20 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {addPostActionCreator, updateNewPostActionCreator}  from './../../../redux/state.js';
 
 function MyPosts (props) {
   let newPostElem = React.createRef();
 
   // Обработка события добавления нового поста
   let onAddPost = () => { 
-    let action = { type: 'ADD-POST' };
-    props.dispatch(action);
+    props.dispatch(addPostActionCreator());
   }
   
   // Обработка события изменения текста в <textarea />
   let onPostChange = () => {
     let text = newPostElem.current.value;
-    let action = { type: 'UPDATE-NEW-POST-TEXT', text: text };
-    props.dispatch(action);
+    props.dispatch(updateNewPostActionCreator(text));
   }
 
   let posts = props.posts.map(p => <Post message={p.message} />);
