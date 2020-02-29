@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route} from 'react-router-dom'
-import store from './redux/store';
+import store from './redux/reduxStore';
 
 let renderEntireTree = (state) => {
   ReactDOM.render(
@@ -15,6 +15,9 @@ let renderEntireTree = (state) => {
 
 renderEntireTree(store.getState());
 
-store.subscribe(renderEntireTree);
+store.subscribe(() => {
+  let state = store.getState();
+  renderEntireTree(state);
+});
 
 // serviceWorker.unregister();
