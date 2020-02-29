@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import {NavLink} from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message'
-import { updateNewMessageBodyCreater, sendMessageCreator } from '../../redux/state';
+import { updateNewMessageBodyCreater, sendMessageCreator } from '../../redux/dialogsReducer';
 
 function Dialogs(props) {
   let dialogs = props.state.dialogs.map(d => <DialogItem id={d.id} name={d.name} />);
