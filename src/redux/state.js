@@ -101,10 +101,11 @@ let store = {
       this._callSubscriber(this._state);
     }
     else if (action.type === SEND_MESSAGE) {
-      let body = this._state.messagePage.newMessageBody
+      let body = this._state.messagePage.newMessageBody;
       let messages = this._state.messagePage.messages;
-      let lastId = messages[messages.length].id;
+      let lastId = messages[messages.length - 1].id;
       this._state.messagePage.messages.push({ id: lastId + 1, message: body });
+      this._state.messagePage.newMessageBody = '';
       this._callSubscriber(this._state);
     }
   }
