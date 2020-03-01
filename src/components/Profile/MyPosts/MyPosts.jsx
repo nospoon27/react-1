@@ -8,13 +8,15 @@ function MyPosts (props) {
 
   // Обработка события добавления нового поста
   let onAddPost = () => { 
-    props.dispatch(addPostCreator());
+    props.addPost();
+    // props.dispatch(addPostCreator());
   }
   
   // Обработка события изменения текста в <textarea />
   let onPostChange = () => {
     let text = newPostElem.current.value;
-    props.dispatch(updateNewPostCreator(text));
+    props.updateNewPostText(text);
+    // props.dispatch(updateNewPostCreator(text));
   }
 
   let posts = props.posts.map(p => <Post message={p.message} />);
