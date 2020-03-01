@@ -15,11 +15,11 @@ let mapStateToProps = state => {
 
 let mapDispatchToProps = dispatch => {
   return {
-    updateNewPostText: () => {
-      dispatch(addPostCreator());
-    },
-    addPost: text => {
+    updateNewPostText: text => {
       dispatch(updateNewPostCreator(text));
+    },
+    addPost: () => {
+      dispatch(addPostCreator());
     }
   };
 };
