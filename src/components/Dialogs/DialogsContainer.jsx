@@ -6,31 +6,28 @@ import {
   sendMessageCreator
 } from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
+import { connect } from "react-redux";
 
-function DialogsContainer(props) {
-  return (
-    <StoreContext.Consumer>
-      {store => {
-        let state = store.getState();
-        
-        let onSendMessageClick = () => {
-          store.dispatch(sendMessageCreator());
-        };
-        let onChangeNewMessage = body => {
-          store.dispatch(updateNewMessageBodyCreater(body));
-        };
+let mapStateToProps = state => {
+  return {
+    dialogsPage: state.dialogsPage
+  };
+};
 
-        return (
-          <Dialogs
-            updateNewMessageBody={onChangeNewMessage}
-            sendMessage={onSendMessageClick}
-            dialogsPage={state.dialogsPage}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
-}
+let mapDispatchToProps = dispatch => {
+  return {
+    updateNewMessageBody: body => {
+      dispatch(updateNewMessageBodyCreater(body));
+    },
+    sendMessage: () => {
+      dispatch(sendMessageCreator());
+    }
+  };
+};
 
-export default DialogsContainer;
+const SuperDialogsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dialogs);
+
+export default SuperDialogsContainer;

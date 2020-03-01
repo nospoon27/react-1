@@ -12,7 +12,7 @@ let initialState = {
       message: "It's my first post"
     },
   ],
-  newPostText: 'Dim-Kamasutra.com'
+  newPostText: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -33,11 +33,9 @@ const profileReducer = (state = initialState, action) => {
       default:
          return state;
    }
-
-   return state;
 }
 
-export let addPostCreator =() => ({ type: ADD_POST })
+export let addPostCreator = () => ({ type: ADD_POST })
 export let updateNewPostCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, text: text })
 
 
