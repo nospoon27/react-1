@@ -3,48 +3,55 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 let initialState = {
-   users: [{
-         id: 1,
-         fullName: 'Dim Zinnatov',
-         followed: false,
-         status: 'Sleep',
-         location: {
-            city: 'Ufa',
-            country: 'Russia'
-         }
-      },
-      {
-         id: 2,
-         fullName: 'Dim Zinnatov',
-         followed: true,
-         status: 'Sleep',
-         location: {
-            city: 'Spb',
-            country: 'Russia'
-         }
-      },
-      {
-         id: 3,
-         fullName: 'Dim Zinnatov',
-         followed: false,
-         status: 'Sleep',
-         location: {
-            city: 'Salavat',
-            country: 'Russia'
-         }
-      },
-      {
-         id: 4,
-         fullName: 'Dim Zinnatov',
-         followed: false,
-         status: 'Sleep',
-         location: {
-            city: 'Moscow',
-            country: 'Russia'
-         }
-      },
-   ]
-};
+   users: []
+}
+// let initialState = {
+//    users: [{
+//       id: 1,
+//       fullName: 'Dim Zinnatov',
+//       photoUrl: 'https://iberocardio.es/wp-content/uploads/2018/09/avatar-ibero-580x580.png',
+//       followed: false,
+//       status: 'Sleep',
+//       location: {
+//          city: 'Ufa',
+//          country: 'Russia'
+//       }
+//    },
+//    {
+//       id: 2,
+//       fullName: 'Dim Zinnatov',
+//       photoUrl: 'https://iberocardio.es/wp-content/uploads/2018/09/avatar-ibero-580x580.png',
+//       followed: true,
+//       status: 'Sleep',
+//       location: {
+//          city: 'Spb',
+//          country: 'Russia'
+//       }
+//    },
+//    {
+//       id: 3,
+//       fullName: 'Dim Zinnatov',
+//       photoUrl: 'https://iberocardio.es/wp-content/uploads/2018/09/avatar-ibero-580x580.png',
+//       followed: false,
+//       status: 'Sleep',
+//       location: {
+//          city: 'Salavat',
+//          country: 'Russia'
+//       }
+//    },
+//    {
+//       id: 4,
+//       fullName: 'Dim Zinnatov',
+//       photoUrl: 'https://iberocardio.es/wp-content/uploads/2018/09/avatar-ibero-580x580.png',
+//       followed: false,
+//       status: 'Sleep',
+//       location: {
+//          city: 'Moscow',
+//          country: 'Russia'
+//       }
+//    },
+//    ]
+// };
 
 const usersReducer = (state = initialState, action) => {
    switch (action.type) {
@@ -81,7 +88,6 @@ const usersReducer = (state = initialState, action) => {
       default:
          return state;
    }
-   return state;
 }
 
 export const followAC = (userId) => ({
