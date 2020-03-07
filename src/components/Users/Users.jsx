@@ -7,12 +7,17 @@ import userPhoto1 from './../../assets/images/userPhoto1.png';
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((responce) => {
-          this.props.setUsers(responce.data.items);
-        });
+    
   }
- 
+  
+  componentDidMount() {
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((responce) => {
+        this.props.setUsers(responce.data.items);
+      });
+  }
+
   render() {
     let users = this.props.users.map((u) => (
       <div key={u.id}>
