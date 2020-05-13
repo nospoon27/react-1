@@ -2,12 +2,20 @@
    grid-area: h;
    background-color: rgba(140, 201, 160, 0.445);
    display: flex;
-   justify-content: center;
+   justify-content: space-between;
    align-items: center;
+   padding: 0 20px;
  }
  
  .header img {
    width: 40px;
-   height: 40px;
  }
  
+ .loginBlock {
+   float: right;
+ }
+
+ .loginBlock a {
+   color: #34495e;
+   font-weight: 600;
+ }

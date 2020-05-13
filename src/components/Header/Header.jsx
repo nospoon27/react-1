@@ -1,12 +1,16 @@
-import React from 'react';
-import s from './Header.module.css';
+import React from "react";
+import s from "./Header.module.css";
+import { NavLink } from "react-router-dom";
 
-function Header () {
-   return(
-      <header className={s.header}>
-        <img src="https://78.media.tumblr.com/905bd8969b0fabdf511b40a367f3213e/tumblr_oyj1lnDpz91vg4lfbo1_1280.png"/>
-      </header>
-   );
+function Header(props) {
+  return (
+    <header className={s.header}>
+      <img src="https://pngimg.com/uploads/lego/lego_PNG85.png" alt="Logo" />
+      <div className={s.loginBlock}>
+        {props.isAuth ? props.login : <NavLink to={"/login"}>Login</NavLink>}
+      </div>
+    </header>
+  );
 }
 
 export default Header;
