@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "./../../assets/images/userPhoto1.png";
 import axios from "axios";
+import { followAPI } from "../../api/followAPI";
 
 let Users = (props) => {
   let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -16,7 +17,7 @@ let Users = (props) => {
         {pages.map((page) => {
           return (
             <span
-              className={props.currentPage === page && styles.selectedPage}
+              className={props.currentPage === page ? styles.selectedPage : ''}
               onClick={(e) => {
                 props.onPageChanged(page);
               }}>
@@ -32,6 +33,7 @@ let Users = (props) => {
               <img
                 src={u.photos.small != null ? u.photos.small : userPhoto}
                 width="80px"
+                alt={u.name}
                 className={styles.userPhoto}
               />
             </div>
@@ -39,40 +41,14 @@ let Users = (props) => {
               {u.followed ? (
                 <button
                   onClick={() => {
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "6d6a5255-b379-4b78-9ee2-ec32179f3020"
-                          }
-                        }
-                      )
-                      .then((responce) => {
-                        if (responce.data.resultCode === 0) {
-                          props.unfollow(u.id);                         
-                        }
-                      });
+                    if(followAPI.unfollow(u.id)) props.unfollow(u.id);
                   }}>
                   unfollow
                 </button>
               ) : (
                 <button
                   onClick={() => {
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "6d6a5255-b379-4b78-9ee2-ec32179f3020"
-                          }
-                        }
-                      )
-                      .then((responce) => {
-                        if (responce.data.resultCode === 0) {
-                          props.follow(u.id);                         
-                        }
-                      });
+                    if(followAPI.follow(u.id)) props.follow(u.id);
                   }}>
                   follow
                 </button>

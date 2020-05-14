@@ -2,38 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { followAC, unFollowAC, setUsersAC, setCurrentPageAC, setUsersTotalCountAC } from "../../redux/usersReducer";
 import Users from "./Users";
-import axios from "axios";
+import { usersAPI } from "../../api/usersAPI";
 
 class UsersContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   //* Как только компонент отрисовался
   componentDidMount() {
-    axios.get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize},`,
-        {
-          withCredentials: true
-        }
-      )
-      .then((responce) => {
-        this.props.setUsers(responce.data.items);
-        this.props.setUsersTotalCount(responce.data.totalCount);
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
+        this.props.setUsers(data.items);
+        this.props.setUsersTotalCount(data.totalCount);
       });
   }
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-        {
-          withCredentials: true
-        }
-      )
-      .then((responce) => {
-        this.props.setUsers(responce.data.items);
+    usersAPI.getUsers(pageNumber, this.props.pageSize)
+      .then((data) => {
+        this.props.setUsers(data.items);
       });
   };
 
