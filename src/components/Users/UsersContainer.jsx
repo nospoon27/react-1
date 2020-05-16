@@ -1,14 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { followAC, unFollowAC, setUsersAC, setCurrentPageAC, setUsersTotalCountAC } from "../../redux/usersReducer";
+import { follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount, setIsFetching } from "../../redux/usersReducer";
 import Users from "./Users";
 import { usersAPI } from "../../api/usersAPI";
+import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
   //* Как только компонент отрисовался
   componentDidMount() {
+    this.props.setIsFetching(true);
     usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
       .then((data) => {
+        this.props.setIsFetching(false);
         this.props.setUsers(data.items);
         this.props.setUsersTotalCount(data.totalCount);
       });
@@ -16,21 +19,26 @@ class UsersContainer extends React.Component {
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
+    this.props.setIsFetching(true);
     usersAPI.getUsers(pageNumber, this.props.pageSize)
       .then((data) => {
+        this.props.setIsFetching(false);
         this.props.setUsers(data.items);
       });
   };
 
   render() {
     return (
-      <Users totalUsersCount={this.props.totalUsersCount} 
+      <>
+        {this.props.isFetching ? <Preloader /> : null}
+        <Users totalUsersCount={this.props.totalUsersCount} 
              pageSize={this.props.pageSize}
              currentPage={this.props.currentPage}
              unfollow={this.props.unfollow}
              follow={this.props.follow}
              users={this.props.users}
              onPageChanged={this.onPageChanged} />
+      </>
     );
   }
 }
@@ -40,28 +48,41 @@ let mapStateToProps = (state) => {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage
+    currentPage: state.usersPage.currentPage,
+    isFetching: state.usersPage.isFetching
   };
 };
 
+/*
 let mapDispatchToProps = (dispatch) => {
   return {
     follow: (userId) => {
-      dispatch(followAC(userId));
+      dispatch(follow(userId));
     },
     unfollow: (userId) => {
-      dispatch(unFollowAC(userId));
+      dispatch(unFollow(userId));
     },
     setUsers: (users) => {
-      dispatch(setUsersAC(users));
+      dispatch(setUsers(users));
     },
     setCurrentPage: (pageNumber) => {
-      dispatch(setCurrentPageAC(pageNumber));
+      dispatch(setCurrentPage(pageNumber));
     },
     setUsersTotalCount: (totalCount) => {
-      dispatch(setUsersTotalCountAC(totalCount));
+      dispatch(setUsersTotalCount(totalCount));
+    },
+    setIsFetching: (isFetching) => {
+      dispatch(setIsFetching(isFetching));
     }
   };
 };
+*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setUsersTotalCount,
+  setIsFetching
+})(UsersContainer);
