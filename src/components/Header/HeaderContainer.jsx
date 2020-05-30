@@ -20,6 +20,4 @@ const mapStateToProps = (state) => ({
    login: state.auth.login
 });
 
-const mapDispatchToProps = () => ({});
-
 export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer);
