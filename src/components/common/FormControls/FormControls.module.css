@@ -10,3 +10,11 @@
 .formControl.error span {
    color: red;
 }
+
+.formSummaryError {
+   border: red 1px solid;
+   border-radius: 6px;
+   padding: 5px;
+   color: red;
+   background-color: rgba(206, 136, 136, 0.281);
+}
