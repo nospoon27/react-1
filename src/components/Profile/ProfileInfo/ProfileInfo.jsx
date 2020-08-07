@@ -3,16 +3,16 @@ import s from './ProfileInfo.module.css'
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
-function ProfileInfo(props) {
-  if(!props.profile){
+function ProfileInfo({profile, status, updateStatus}) {
+  if(!profile){
     return <Preloader />
   }
   return (
     <div>
       {/* <div className={s.profileImage}></div> */}
       <div className={s.profileDescription}>
-        <img src={props.profile.photos.large} alt=""/>
-        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+        <img src={profile.photos.large} alt=""/>
+        <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
       </div>
     </div>
   );
