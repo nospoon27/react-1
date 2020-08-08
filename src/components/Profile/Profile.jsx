@@ -1,12 +1,18 @@
-import React from 'react';
-import s from './Profile.module.css';
-import ProfileInfo from './ProfileInfo/ProfileInfo'
-import MyPostsContainer from './MyPosts/MyPostsContainer';
+import React from "react";
+import s from "./Profile.module.css";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 function Profile(props) {
   return (
     <div className={s.profileWrapper}>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+      <ProfileInfo
+        savePhoto={props.savePhoto}
+        isOwner={props.isOwner}
+        profile={props.profile}
+        status={props.status}
+        updateStatus={props.updateStatus}
+      />
       <MyPostsContainer />
     </div>
   );
