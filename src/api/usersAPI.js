@@ -1,5 +1,4 @@
 import {instance} from './api';
-import { follow } from '../redux/usersReducer';
 
 export const usersAPI = {
    getUsers (currentPage = 1, pageSize = 10) {
