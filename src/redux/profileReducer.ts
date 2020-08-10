@@ -1,5 +1,6 @@
 import { profileAPI } from "../api/profileAPI";
 import { stopSubmit } from "redux-form";
+import { PostType, ProfileType, PhotosType } from "../types/types";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -21,13 +22,13 @@ let initialState = {
       message: "It's my first post",
       likesCount: 3,
     },
-  ],
+  ] as Array<PostType>,
   newPostText: "",
-  profile: null,
+  profile: null as ProfileType | null,
   status: "",
 };
-
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+const profileReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ADD_POST: {
       let id = state.posts.length + 1;
@@ -65,7 +66,7 @@ const profileReducer = (state = initialState, action) => {
         profile: {
           ...state.profile,
           photos: action.photos
-        }
+        } as ProfileType
       }
     }
     case SAVE_PROFILE: {
@@ -78,35 +79,58 @@ const profileReducer = (state = initialState, action) => {
       return state;
   }
 };
+type AddPostCreatorActionType = {
+  type: typeof ADD_POST,
+  text: string
+}
+export let addPostCreator = (text: string): AddPostCreatorActionType => ({ type: ADD_POST, text });
+type DeletePostActionType = {
+  type: typeof DELETE_POST,
+  postId: number
+}
+export let deletePost = (postId: number): DeletePostActionType => ({ type: DELETE_POST, postId });
+type SetStatusActionType = {
+  type: typeof SET_STATUS,
+  status: string
+}
+export let setStatus = (status: string): SetStatusActionType => ({ type: SET_STATUS, status });
+type SetUserProfileActionType = {
+  type: typeof SET_USER_PROFILE,
+  profile: ProfileType
+}
+export let setUserProfile = (profile: any): SetUserProfileActionType => ({ type: SET_USER_PROFILE, profile });
+type SavePhotoSuccessActionType = {
+  type: typeof SAVE_PHOTO_SUCCESS,
+  photos: PhotosType
+}
+export let savePhotoSuccess = (photos: any): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
+type SaveProfileSuccessActionType = {
+  type: typeof SAVE_PROFILE,
+  profile: ProfileType
+}
+export let saveProfileSuccess = (profile: any) => ({type: SAVE_PROFILE, profile});
 
-export let addPostCreator = (text) => ({ type: ADD_POST, text });
-export let deletePost = (postId) => ({ type: DELETE_POST, postId });
-export let setStatus = (status) => ({ type: SET_STATUS, status });
-export let setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
-export let savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
-export let saveProfileSuccess = (profile) => ({type: SAVE_PROFILE, profile});
-
-export let getStatus = (userId) => async (dispatch) => {
+export let getStatus = (userId: number) => async (dispatch: any) => {
   let response = await profileAPI.getStatus(userId);
   dispatch(setStatus(response.data));
 };
-export let updateStatus = (status) => async (dispatch) => {
+export let updateStatus = (status: string) => async (dispatch: any) => {
   let response = await profileAPI.updateStatus(status);
   if (response.data.resultCode === 0) {
     dispatch(setStatus(status));
   }
 };
-export let getUserProfile = (userId) => async (dispatch) => {
+export let getUserProfile = (userId: number) => async (dispatch: any) => {
   let response = await profileAPI.getProfile(userId);
   dispatch(setUserProfile(response.data));
 };
-export let savePhoto = (photo) => async (dispatch) => {
+export let savePhoto = (photo: any) => async (dispatch: any) => {
   let response = await profileAPI.savePhoto(photo);
   if(response.data.resultCode === 0){
     dispatch(savePhotoSuccess(response.data.data.photos))
   }
 };
-export let saveProfile = (profile) => async (dispatch, getState) => {
+export let saveProfile = (profile: any) => async (dispatch: any, getState: any) => {
   let userId = getState().auth.userId;
   console.log(profile);
   let response = await profileAPI.saveProfile(profile);
@@ -118,7 +142,7 @@ export let saveProfile = (profile) => async (dispatch, getState) => {
       ? response.data.messages
       : 'Some error';
     if(message.length > 1){
-      message.forEach(m => {
+      message.forEach((m: any) => {
         m += '\n';
       });
     }
