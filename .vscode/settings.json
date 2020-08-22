@@ -36,4 +36,5 @@
    "cSpell.enabled": false,
    "prettier.arrowParens": "always",
    "prettier.jsxBracketSameLine": true,
+   "files.autoSave": "onFocusChange",
 }

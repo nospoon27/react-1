@@ -1,41 +1,25 @@
 import React from "react";
-import { reduxForm, Field } from "redux-form";
-import { Input } from "../common/FormControls/FormsControl";
-import { required } from '../../utils/validators/validators';
-import { login } from '../../redux/authReducer'
+import { reduxForm } from "redux-form";
+import { Input, createField } from "../common/FormControls/FormsControl";
+import { required } from "../../utils/validators/validators";
+import { login } from "../../redux/authReducer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import style from '../common/FormControls/FormControls.module.css'
+import style from "../common/FormControls/FormControls.module.css";
 
-let LoginForm = (props) => {
-   const { handleSubmit } = props;
+let LoginForm = ({handleSubmit, error, captchaUrl}) => {
    return (
      <form onSubmit={handleSubmit}>
-       <div>
-         <Field
-           type={"text"}
-           name={"email"}
-           placeholder={"Email"}
-           component={Input}
-           validate={[required]}
-         />
-       </div>
-       <div>
-         <Field
-           type={"text"}
-           name={"password"}
-           placeholder={"Password"}
-           type={"password"}
-           component={Input}
-           validate={[required]}
-         />
-       </div>
-       <div>
-         <label>Remember me?</label>
-         <Field type={"checkbox"} name={"rememberMe"} component={Input} />
-       </div>
-       {props.error && (
-         <div className={style.formSummaryError}>{props.error}</div>
+       {createField('Email', 'email', [required], Input, {type: 'email'})}
+       {createField('Password', 'password', [required], Input, {type: 'password'})}
+       {createField(null, 'rememberMe', [], Input, {type: 'checkbox'}, 'Remember me?')}
+
+       {captchaUrl && <div>
+         <img alt={'captcha'} src={captchaUrl} />
+         {createField('Symbols from image', 'captcha', [required], Input)}
+       </div>}
+       {error && (
+         <div className={style.formSummaryError}>{error}</div>
        )}
        <div>
          <button type={"submit"}>Login</button>
@@ -50,7 +34,12 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
    const onSubmit = (formData) => {
-      props.login(formData.email, formData.password, formData.rememberMe);
+      props.login(
+        formData.email,
+        formData.password,
+        formData.rememberMe,
+        formData.captcha
+      );
    }
 
    if(props.isAuth){
@@ -60,13 +49,14 @@ const Login = (props) => {
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl
 });
 
 export default connect(mapStateToProps, {

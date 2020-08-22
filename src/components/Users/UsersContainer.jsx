@@ -4,15 +4,17 @@ import { follow, unfollow, setCurrentPage, setUsersTotalCount,
   toggleFollowProgress, requestUsers } from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { getTotalUsersCount, getCurrentPage, getPageSize, getUsers, getFollowingInProgress, getIsFetching } from "../../redux/usersSelector";
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress, getUsersSuperSelector } from "../../redux/usersSelectors";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+    const {currentPage, pageSize} = this.props;
+    this.props.requestUsers(currentPage, pageSize);
   }
 
   onPageChanged = (pageNumber) => {
-    this.props.requestUsers(pageNumber, this.props.pageSize);
+    const {pageSize} = this.props;
+    this.props.requestUsers(pageNumber, pageSize);
     this.props.setCurrentPage(pageNumber);
   };
 

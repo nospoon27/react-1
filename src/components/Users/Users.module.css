@@ -3,30 +3,3 @@
    height: 80px;
 }
 
-.pagination .selectedPage {
-   color: #16a085!important;
-   background: #d3d4d4;
-}
-
-.pagination {
-   display: flex;
-   justify-content: center;
-}
-
-.pagination > span {
-   display: flex;
-   justify-content: center;
-   width: 20px;
-   margin: 0 5px;
-   padding: 10px 15px;
-   background: #ecf0f1;
-   border-radius: 20px;
-   color: #34495e;
-   font-weight: 600;
-   font-size: 20px;
-}
-
-.pagination > span:hover {
-   background: #d3d4d4;
-   cursor: pointer;
-}

@@ -25,6 +25,15 @@ class ProfileStatus extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.status !== this.props.status){
+      this.setState({
+        status: this.props.status
+      });
+    }
+    console.log('component did update');
+  }
+
   render() {
     return (
       <div>
