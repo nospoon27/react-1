@@ -1,63 +1,37 @@
 import { getAuthUserData } from "./authReducer";
+import { BaseThunkType, InferActionTypes } from "./reduxStore";
 
-const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS';
-const SET_GLOBAL_ERROR = 'SET_GLOBAL_ERROR';
-const UNSET_GLOBAL_ERROR = 'UNSET_GLOBAL_ERROR'; 
-
-type InilialStateType = {
-   initialized: boolean
-}
-
-let initialState: InilialStateType = {
+let initialState = {
    initialized: false
 };
 
-const appReducer = (state = initialState, action: any): InilialStateType => {
+type InitialStateType = typeof initialState;
+
+const appReducer = (state = initialState, action: ActionTypes): InitialStateType => {
    switch(action.type){
-      case SET_INITIALIZED_SUCCESS:
+      case 'SN/APP/SET_INITIALIZED_SUCCESS':
          return {
             ...state,
             initialized: true
          };
-         // case SET_GLOBAL_ERROR:
-         //    return {
-         //       ...state,
-         //       globalError: action.globalError
-         //    }
-         // case UNSET_GLOBAL_ERROR:
-         //    return {
-         //       ...state,
-         //       globalError: null
-         //    }
        default:
           return{...state};
    }
 };
 
-type InitializedSuccessType = {
-   type: typeof SET_INITIALIZED_SUCCESS
+type ActionTypes = InferActionTypes<typeof actions>;
+
+export const actions = {
+   initializedSuccess: () => ({ type: 'SN/APP/SET_INITIALIZED_SUCCESS' }) as const,
 }
 
-export const initializedSuccess = () => ({
-  type: SET_INITIALIZED_SUCCESS,
-});
+type ThunkType = BaseThunkType<ActionTypes>;
+
 export const initializeApp = () => (dispatch: any) => {
    let promise = dispatch(getAuthUserData());
    Promise.all([promise])
       .then(() => {
-      dispatch(initializedSuccess());
+      dispatch(actions.initializedSuccess());
    });
 }
-export const setGlobalError = (error: string) => (dispatch: any) => {
-   dispatch({
-      type: SET_GLOBAL_ERROR,
-   action: {
-      globalError: error
-   }});
-   setTimeout(unsetGlobalError, 5000);
-}
-export const unsetGlobalError = () => ({
-   type: UNSET_GLOBAL_ERROR,
-   action: {}
-})
 export default appReducer;

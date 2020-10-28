@@ -1,4 +1,4 @@
-import profileReducer, { addPostCreator, deletePost } from './profileReducer';
+import profileReducer, { actions } from './profileReducer';
 import React from 'react';
 
 let state = {
@@ -14,13 +14,14 @@ let state = {
     },
   ],
   newPostText: '',
+  profile: null
 };
 
 let postText = 'new post text';
 
 it('posts length should be incremented after new post adding', () => {
    // 1. test date
-   let action = addPostCreator(postText);
+   let action = actions.addPostCreator(postText);
    
    // 2. action
    let newState = profileReducer(state, action);
@@ -31,7 +32,7 @@ it('posts length should be incremented after new post adding', () => {
 
 it('message of new post should be correct', () => {
    // 1. test date
-   let action = addPostCreator('new post text');
+   let action = actions.addPostCreator('new post text');
    
    // 2. action
    let newState = profileReducer(state, action);
@@ -41,7 +42,7 @@ it('message of new post should be correct', () => {
 });
 
 it('post length after deleting should be increment', () => {
-   let action = deletePost(1);
+   let action = actions.deletePost(1);
    let newState = profileReducer(state, action);
 
    expect(newState.posts.length).toBe(1);
